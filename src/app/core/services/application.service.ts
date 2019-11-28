@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationType } from '../../enums/notification-type.enum';
-import { NzNotificationService } from 'ng-zorro-antd';
+import { NzNotificationService, NzConfigService } from 'ng-zorro-antd';
 import { IAppSettings, APP_SETTINGS } from '../app-settings';
 import { LocalStorageService } from './local-storage.service';
 import { SpinnerService } from 'src/app/core/spinner/spinner.service';
@@ -14,9 +14,10 @@ export class ApplicationService {
         @Inject(APP_SETTINGS) protected config: IAppSettings,
         public router: Router,
         public notificationService: NzNotificationService,
+        public notificationConfig: NzConfigService,
         public spinnerService: SpinnerService
     ) {
-        this.notificationService.config({
+        this.notificationConfig.set("notification", {
             nzPlacement: this.config.notificationPlacement,
             nzAnimate: true,
             // nzDuration: 100000
